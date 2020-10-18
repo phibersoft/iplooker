@@ -1,12 +1,10 @@
-import express from 'express';
+import express from "express";
 
 const app: express.Application = express();
 const port: number = Number(process.env.PORT) || 3001;
-
-app.listen(port, (err: Error) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log('NODE_ENV =', process.env.NODE_ENV);
-  }
+app.get("/", (req: express.Request, res: express.Response) =>
+  res.json({ hello: "World!" })
+);
+app.listen(port, () => {
+  console.log(`Started on ${port} & Mode : ${process.env.NODE_ENV}`);
 });
