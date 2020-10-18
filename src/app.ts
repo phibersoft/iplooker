@@ -21,6 +21,12 @@ app.get(
     res.json({ yourIp: res.locals.clientIp, oldIpAddress: results.rows });
   }
 );
+app.get("/reset", async (req: express.Request, res: express.Response) => {
+  try {
+    const resets = await db.query("TRUNCATE TABLE address RESTART IDENTITY");
+  } catch (err) {}
+  res.json({ success: true });
+});
 app.listen(port, () => {
   console.log(`Started on ${port} & Mode : ${process.env.NODE_ENV}`);
 });
