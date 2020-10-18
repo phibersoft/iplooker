@@ -1,7 +1,7 @@
 import path from "path";
 import webpack from "webpack";
 
-const config = {
+const config: webpack.Configuration = {
   mode: "production",
   entry: "./src/app.ts",
   module: {
@@ -19,6 +19,9 @@ const config = {
   },
   resolve: {
     extensions: [".ts", ".js"],
+    alias: {
+      "pg-native": "./src/dummy.ts",
+    },
   },
   target: "node",
 };
