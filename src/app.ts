@@ -8,9 +8,15 @@ app.get(
   "/",
   ipMiddleware,
   async (req: express.Request, res: express.Response) => {
-    const inserts = await db.query("INSERT into address(address) VALUES($1)", [
-      res.locals.clientIp,
-    ]);
+    try {
+      const inserts = await db.query(
+        "INSERT into address(address) VALUES($1)",
+        [res.locals.clientIp]
+      );
+    } catch (err) {
+      console.log(err.message);
+    }
+
     const results = await db.query("SELECT * FROM address");
     res.json({ yourIp: res.locals.clientIp, oldIpAddress: results.rows });
   }
