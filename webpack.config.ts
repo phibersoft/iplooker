@@ -17,6 +17,7 @@ const config: webpack.Configuration = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
   },
+  plugins: [new webpack.IgnorePlugin(/^pg-native$/)],
   resolve: {
     extensions: [".ts", ".js"],
     alias: {
